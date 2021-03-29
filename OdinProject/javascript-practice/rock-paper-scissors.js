@@ -21,18 +21,14 @@ MY PLAN
 ------------------
 What i need to fix
 ------------------
-- when the user picks paper and the computer picks rock, the user still loses, even though they should win.
-        * User-paper = 2, computer-rock = 1
-- when the user picks rock and the computer picks paper, the user wins, when they should lose.
-        * User-rock = 1, computer-paper = 2
-- when the user picks paper and the computer picks scissors, the user wins, when they should lose.
-        * User-paper = 2, computer-scissors = 3
-- when the user picks scissors and the computer picks paper, the user loses, when they should win.
-        * User-scissors = 3, computer-paper = 2
+
 */
 
-let computerOption = Math.floor(Math.random() * 3) + 1;
-let userOption = Math.floor(Math.random() * 3) + 1;
+
+const computerOption = Math.floor(Math.random() * 3) + 1;
+const userOption = Math.floor(Math.random() * 3) + 1;
+let userPoints = 0;
+let computerPoints = 0;
 
 function computerPlay(){
    
@@ -63,39 +59,33 @@ function userPlay(){
 function playRockPaperScissors(playerSelection, computerSelection){
     //const playerSelection = prompt("Let's play Rock, Paper, Scissors! What would you like to go with?");
 
-    if(computerOption === userOption){
+    if((computerOption === 1 && userOption === 1) || (computerOption === 2 && userOption === 2) || (computerOption === 3 && userOption === 3)){
         return "It's a tie! Let's try that again."
-    }else if(computerOption < userOption){
+    }else if((computerOption === 1 && userOption === 3) || (computerOption === 2 && userOption === 1) || (computerOption === 3 && userOption === 2)){
+        computerPoints++;
         return "You lose! Better luck next time!"
     }else{
+        userPoints++;
         return "You win! Good job!"
     }
-    /*
-    //user chooses rock
-    if(userChoice === "rock" && computerChoice === "rock"){
-        return "It's a tie! Go again."
-    }else if(userChoice === "rock" && computerChoice === "paper"){
-        return "You lose! Paper beats rock!"
-    }else if(userChoice === "rock" && computerChoice === "scissors"){
-        return "You win! Rock beats scissors!"
-    }//user chooses scissors
-    else if(userChoice === "scissors" && computerChoice === "scissors"){
-        return "It's a tie! Go again."
-    }else if(userChoice === "scissors" && computerChoice === "paper"){
-        return "You win! Scissors beats paper!"
-    }else if(userChoice === "scissors" && computerChoice === "rock"){
-        return "You lose! Rock beats scissors!"
-    }//user chooses paper
-    else if(userChoice === "paper" && computerChoice === "paper"){
-        return "It's a tie! Go again."
-    }else if(userChoice === "paper" && computerChoice === "rock"){
-        return "You win! Paper beats rock!"
-    }else if(userChoice === "paper" && computerChoice === "scissors"){
-        return "You loser! Scissors beats paper!"
-    }
-    */
 };
 
-console.log(playRockPaperScissors(userPlay, computerPlay));
-console.log(userPlay());
-console.log(computerPlay());
+
+function game(){
+
+    while(userPoints < 6 || computerPoints < 6){
+        console.log(playRockPaperScissors(userPlay, computerPlay));
+        console.log(userPlay());
+        console.log(computerPlay());
+        console.log(userPoints);
+        console.log(computerPoints);
+    }
+};
+
+
+console.log(game());
+
+
+//console.log(playRockPaperScissors(userPlay, computerPlay));
+
+
